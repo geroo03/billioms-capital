@@ -1,103 +1,87 @@
-import Image from "next/image";
+import Link from "next/link";
+import { CourseCard } from "@/components/course-card";
+import { listPublishedCourses } from "@/lib/courses";
 
-export default function Home() {
+
+const AUDIENCES = [
+  {
+    title: "Si nunca estudiaste finanzas",
+    body: "Empezás desde cero, sin necesidad de un título. Aprendés a ordenar tu plata y a dar tus primeros pasos invirtiendo.",
+  },
+  {
+    title: "Si ya estudiaste y querés más",
+    body: "Cursos avanzados de trading, análisis y mercados para seguir capacitándote y aplicar lo que sabés.",
+  },
+];
+
+const STEPS = [
+  { title: "Elegís tu curso", body: "Pagás una sola vez con Mercado Pago, en pesos." },
+  { title: "Cursás a tu ritmo", body: "Clases grabadas que se habilitan martes y jueves. Las mirás cuando quieras." },
+  { title: "Terminás con certificado", body: "Al completar todas las clases recibís tu certificado." },
+];
+
+export default async function HomePage() {
+  const courses = await listPublishedCourses().catch(() => []);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+    <>
+      <section className="mx-auto max-w-6xl px-4 pb-16 pt-20 sm:pt-28">
+        <p className="text-sm uppercase tracking-[0.25em] text-gold">Educación financiera</p>
+        <h1 className="mt-4 max-w-3xl font-serif text-4xl leading-tight sm:text-6xl">
+          Aprendé a manejar tu dinero e invertir, con alguien que lo hace todos los días.
+        </h1>
+        <p className="mt-6 max-w-2xl text-lg text-muted">
+          Cursos de finanzas, inversiones y negocios explicados en simple, a precios accesibles.
+        </p>
+        <div className="mt-10 flex flex-wrap gap-4">
+          <Link href="/cursos" className="rounded-full bg-gold px-6 py-3 font-medium text-ink hover:bg-gold-strong">
+            Ver cursos
+          </Link>
+          <a href="#como-funciona" className="rounded-full border border-line px-6 py-3 hover:border-paper">
+            Cómo funciona
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      <section className="mx-auto grid max-w-6xl gap-6 px-4 pb-20 sm:grid-cols-2">
+        {AUDIENCES.map((a) => (
+          <div key={a.title} className="rounded-2xl border border-line p-8">
+            <h2 className="font-serif text-2xl">{a.title}</h2>
+            <p className="mt-3 text-muted">{a.body}</p>
+          </div>
+        ))}
+      </section>
+
+      {courses.length > 0 && (
+        <section className="mx-auto max-w-6xl px-4 pb-20">
+          <div className="flex items-end justify-between">
+            <h2 className="font-serif text-3xl">Cursos</h2>
+            <Link href="/cursos" className="text-sm text-gold hover:underline">
+              Ver todos
+            </Link>
+          </div>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {courses.slice(0, 3).map((c) => (
+              <CourseCard key={c.id} course={c} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section id="como-funciona" className="border-t border-line bg-ink-soft">
+        <div className="mx-auto max-w-6xl px-4 py-20">
+          <h2 className="font-serif text-3xl">Cómo funciona</h2>
+          <ol className="mt-10 grid gap-8 sm:grid-cols-3">
+            {STEPS.map((s, i) => (
+              <li key={s.title}>
+                <span className="font-serif text-4xl text-gold">{i + 1}</span>
+                <h3 className="mt-2 text-lg font-medium">{s.title}</h3>
+                <p className="mt-2 text-muted">{s.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    </>
   );
 }
