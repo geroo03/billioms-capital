@@ -5,7 +5,10 @@ import { listPublishedCourses } from "@/lib/courses";
 export const metadata: Metadata = { title: "Cursos" };
 
 export default async function CoursesPage() {
-  const courses = await listPublishedCourses();
+  const courses = await listPublishedCourses().catch((error: unknown) => {
+    console.error("[cursos] no se pudo cargar el catálogo", error);
+    return [];
+  });
   return (
     <section className="mx-auto max-w-6xl px-4 py-16">
       <h1 className="font-serif text-4xl">Cursos</h1>

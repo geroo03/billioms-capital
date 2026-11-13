@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
+// Every page reads the visitor's session (header, prices, access), so nothing
+// is prerendered at build time; this also lets the build run without secrets.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: { default: "Billions Capital | Cursos de finanzas e inversiones", template: "%s | Billions Capital" },
   description:
