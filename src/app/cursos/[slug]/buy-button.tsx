@@ -11,7 +11,7 @@ export function BuyButton({ slug, label }: { slug: string; label: string }) {
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-full bg-gold px-6 py-3 font-medium text-ink hover:bg-gold-strong disabled:opacity-60"
+        className="w-full rounded-full bg-gold px-6 py-3.5 font-semibold text-ink transition hover:bg-gold-strong hover:shadow-[0_0_20px_rgba(212,166,74,0.25)] disabled:opacity-60"
       >
         {pending ? "Redirigiendo a Mercado Pago…" : label}
       </button>

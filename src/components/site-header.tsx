@@ -6,20 +6,20 @@ export async function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/80 bg-ink/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <Link href="/" className="flex items-center gap-2 font-serif text-xl tracking-wide">
+        <Link href="/" className="flex shrink-0 items-center gap-2 font-serif text-lg tracking-wide sm:text-xl">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-gold font-serif text-sm text-ink" aria-hidden="true">BC</span>
-          <span>Billions <span className="text-gold">Capital</span></span>
+          <span className="hidden min-[400px]:inline">Billions <span className="text-gold">Capital</span></span>
         </Link>
-        <nav className="flex items-center gap-5 text-sm">
+        <nav className="flex items-center gap-3 text-sm sm:gap-5">
           <Link href="/cursos" className="text-muted hover:text-paper">
             Cursos
           </Link>
           {user ? (
-            <Link href="/mi-cuenta" className="rounded-full border border-gold px-4 py-1.5 text-gold hover:bg-gold hover:text-ink">
+            <Link href="/mi-cuenta" className="rounded-full border border-gold px-3 py-1.5 text-gold sm:px-4 hover:bg-gold hover:text-ink">
               Mi cuenta
             </Link>
           ) : (
-            <Link href="/ingresar" className="rounded-full bg-gold px-4 py-1.5 font-medium text-ink hover:bg-gold-strong">
+            <Link href="/ingresar" className="rounded-full bg-gold px-3 py-1.5 font-medium sm:px-4 text-ink hover:bg-gold-strong">
               Ingresar
             </Link>
           )}

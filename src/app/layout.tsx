@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
@@ -6,6 +7,9 @@ import "./globals.css";
 // Every page reads the visitor's session (header, prices, access), so nothing
 // is prerendered at build time; this also lets the build run without secrets.
 export const dynamic = "force-dynamic";
+
+const serif = Playfair_Display({ subsets: ["latin"], weight: ["500", "600"], variable: "--font-playfair", display: "swap" });
+const sans = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-jakarta", display: "swap" });
 
 export const metadata: Metadata = {
   title: { default: "Billions Capital | Cursos de finanzas e inversiones", template: "%s | Billions Capital" },
@@ -15,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es">
+    <html lang="es" className={`${serif.variable} ${sans.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
         <SiteHeader />
         <main className="flex-1">{children}</main>
