@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
@@ -19,8 +20,23 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <footer className="border-t border-line">
-          <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-muted">
-            © {new Date().getFullYear()} Billions Capital. El contenido es educativo y no constituye una recomendación de inversión.
+          <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 text-sm text-muted sm:grid-cols-[2fr_1fr]">
+            <div>
+              <p className="font-serif text-lg text-paper">
+                Billions <span className="text-gold">Capital</span>
+              </p>
+              <p className="mt-2 max-w-md">Cursos de finanzas, inversiones y negocios explicados en simple.</p>
+            </div>
+            <nav className="flex flex-col gap-2" aria-label="Pie de página">
+              <Link href="/cursos" className="hover:text-paper">Cursos</Link>
+              <Link href="/ingresar" className="hover:text-paper">Ingresar</Link>
+              <Link href="/mi-cuenta" className="hover:text-paper">Mi cuenta</Link>
+            </nav>
+          </div>
+          <div className="border-t border-line">
+            <p className="mx-auto max-w-6xl px-4 py-6 text-xs text-muted">
+              © {new Date().getFullYear()} Billions Capital. El contenido es educativo y no constituye una recomendación de inversión.
+            </p>
           </div>
         </footer>
       </body>
